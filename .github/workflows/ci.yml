@@ -15,9 +15,6 @@ jobs:
     permissions:
       contents: read
       packages: write
-    defaults:
-      run:
-        working-directory: src
 
     steps:
       - name: Checkout code
@@ -36,7 +33,7 @@ jobs:
       - name: Build Docker image with cache
         uses: useblacksmith/build-push-action@v2
         with:
-          context: ./src
+          context: .
           push: false
           load: true
           tags: gha-3rd-party-runner-sample-web:latest
