@@ -23,8 +23,8 @@ jobs:
       - name: CPU Benchmark (cryptographic hashing)
         run: |
           echo "Starting CPU benchmark with SHA-512 hashing..."
-          echo "This workload should take ~20-30s depending on CPU performance"
-          time for i in $(seq 1 5000); do
+          echo "This workload should take ~90-120s depending on CPU performance"
+          time for i in $(seq 1 30000); do
             echo "benchmark data iteration $i" | openssl dgst -sha512 > /dev/null
           done
           echo "Benchmark completed!"
