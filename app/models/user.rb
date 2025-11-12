@@ -71,11 +71,11 @@ class User < ApplicationRecord
 
     def filter_by_status(status)
       case status
-      when 'active'
+      when "active"
         active_users
-      when 'suspended'
+      when "suspended"
         suspended_users
-      when 'deleted'
+      when "deleted"
         deleted_users
       else
         all

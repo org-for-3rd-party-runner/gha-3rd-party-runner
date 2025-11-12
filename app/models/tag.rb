@@ -7,7 +7,7 @@ class Tag < ApplicationRecord
 
   before_validation :generate_slug, if: -> { slug.blank? && name.present? }
 
-  scope :popular, -> { joins(:blog_tags).group(:id).order('COUNT(blog_tags.id) DESC') }
+  scope :popular, -> { joins(:blog_tags).group(:id).order("COUNT(blog_tags.id) DESC") }
   scope :recent, -> { order(created_at: :desc) }
   scope :by_name, -> { order(:name) }
 
@@ -24,7 +24,7 @@ class Tag < ApplicationRecord
       .where(blog_tags: { blog_id: blog_ids })
       .where.not(id: id)
       .group(:id)
-      .order('COUNT(blog_tags.id) DESC')
+      .order("COUNT(blog_tags.id) DESC")
       .limit(limit)
   end
 

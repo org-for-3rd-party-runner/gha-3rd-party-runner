@@ -11,8 +11,8 @@ module CpuBenchmark
     # @param radius [Integer] blur radius (default: 1)
     # @return [Array<Array<Float>>] blurred matrix
     def self.blur_matrix(matrix, radius: 1)
-      raise ArgumentError, 'Matrix cannot be empty' if matrix.empty? || matrix.first.empty?
-      raise ArgumentError, 'Radius must be positive' if radius < 1
+      raise ArgumentError, "Matrix cannot be empty" if matrix.empty? || matrix.first.empty?
+      raise ArgumentError, "Radius must be positive" if radius < 1
 
       rows = matrix.size
       cols = matrix.first.size
@@ -49,9 +49,9 @@ module CpuBenchmark
     # @param kernel [Array<Array<Numeric>>] 2D array representing the filter kernel
     # @return [Array<Array<Float>>] filtered matrix
     def self.apply_filter(matrix, kernel)
-      raise ArgumentError, 'Matrix cannot be empty' if matrix.empty? || matrix.first.empty?
-      raise ArgumentError, 'Kernel cannot be empty' if kernel.empty? || kernel.first.empty?
-      raise ArgumentError, 'Kernel dimensions must be odd' if kernel.size.even? || kernel.first.size.even?
+      raise ArgumentError, "Matrix cannot be empty" if matrix.empty? || matrix.first.empty?
+      raise ArgumentError, "Kernel cannot be empty" if kernel.empty? || kernel.first.empty?
+      raise ArgumentError, "Kernel dimensions must be odd" if kernel.size.even? || kernel.first.size.even?
 
       matrix_convolution(matrix, kernel)
     end
@@ -98,30 +98,30 @@ module CpuBenchmark
     module Filters
       # Edge detection filter (Sobel-like)
       EDGE_DETECTION = [
-        [-1, -1, -1],
-        [-1,  8, -1],
-        [-1, -1, -1]
+        [ -1, -1, -1 ],
+        [ -1,  8, -1 ],
+        [ -1, -1, -1 ]
       ].freeze
 
       # Sharpen filter
       SHARPEN = [
-        [ 0, -1,  0],
-        [-1,  5, -1],
-        [ 0, -1,  0]
+        [ 0, -1,  0 ],
+        [ -1,  5, -1 ],
+        [ 0, -1,  0 ]
       ].freeze
 
       # Box blur filter
       BOX_BLUR = [
-        [1.0 / 9, 1.0 / 9, 1.0 / 9],
-        [1.0 / 9, 1.0 / 9, 1.0 / 9],
-        [1.0 / 9, 1.0 / 9, 1.0 / 9]
+        [ 1.0 / 9, 1.0 / 9, 1.0 / 9 ],
+        [ 1.0 / 9, 1.0 / 9, 1.0 / 9 ],
+        [ 1.0 / 9, 1.0 / 9, 1.0 / 9 ]
       ].freeze
 
       # Identity filter (no change)
       IDENTITY = [
-        [0, 0, 0],
-        [0, 1, 0],
-        [0, 0, 0]
+        [ 0, 0, 0 ],
+        [ 0, 1, 0 ],
+        [ 0, 0, 0 ]
       ].freeze
     end
   end

@@ -219,8 +219,8 @@ RSpec.describe Tag, type: :model do
         related = tag.related_tags.to_a
 
         # related_tag1 and related_tag2 both share 2 blogs, related_tag3 shares 1
-        expect([related_tag1, related_tag2]).to include(related[0])
-        expect([related_tag1, related_tag2]).to include(related[1])
+        expect([ related_tag1, related_tag2 ]).to include(related[0])
+        expect([ related_tag1, related_tag2 ]).to include(related[1])
         expect(related[2]).to eq(related_tag3)
       end
     end

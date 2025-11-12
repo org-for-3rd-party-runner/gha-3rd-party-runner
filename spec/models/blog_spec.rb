@@ -131,7 +131,7 @@ RSpec.describe Blog, type: :model do
 
       it 'orders in descending order' do
         results = Blog.recent.to_a
-        expect(results.map(&:id)).to eq([newest_blog.id, older_blog.id, oldest_blog.id])
+        expect(results.map(&:id)).to eq([ newest_blog.id, older_blog.id, oldest_blog.id ])
       end
     end
   end
@@ -152,7 +152,7 @@ RSpec.describe Blog, type: :model do
         # When called without a scope, current_scope returns nil
         # so we need to call it within a scope chain
         results = Blog.all.filter_by_title('')
-        expect(results.to_a).to match_array([blog1, blog2, blog3])
+        expect(results.to_a).to match_array([ blog1, blog2, blog3 ])
       end
 
       it 'handles SQL injection attempts' do
@@ -181,7 +181,7 @@ RSpec.describe Blog, type: :model do
         # When called without a scope, current_scope returns nil
         # so we need to call it within a scope chain
         results = Blog.all.filter_by_status('invalid')
-        expect(results.to_a).to match_array([published_blog, unpublished_blog])
+        expect(results.to_a).to match_array([ published_blog, unpublished_blog ])
       end
     end
 
@@ -276,13 +276,13 @@ RSpec.describe Blog, type: :model do
       end
 
       it 'filters by tag_ids when provided' do
-        results = Blog.filter_by_user_and_tags(tag_ids: [tag1.id])
+        results = Blog.filter_by_user_and_tags(tag_ids: [ tag1.id ])
         expect(results).to include(blog1, blog3)
         expect(results).not_to include(blog2)
       end
 
       it 'filters by both user_id and tag_ids' do
-        results = Blog.filter_by_user_and_tags(user_id: user1.id, tag_ids: [tag1.id])
+        results = Blog.filter_by_user_and_tags(user_id: user1.id, tag_ids: [ tag1.id ])
         expect(results).to include(blog1, blog3)
         expect(results).not_to include(blog2)
       end
@@ -293,7 +293,7 @@ RSpec.describe Blog, type: :model do
       end
 
       it 'handles nil user_id' do
-        results = Blog.filter_by_user_and_tags(user_id: nil, tag_ids: [tag1.id])
+        results = Blog.filter_by_user_and_tags(user_id: nil, tag_ids: [ tag1.id ])
         expect(results).to include(blog1, blog3)
       end
 

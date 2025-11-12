@@ -10,7 +10,7 @@ class CreateUserStatuses < ActiveRecord::Migration[8.0]
       t.datetime :created_at, null: false
     end
 
-    add_index :user_statuses, [:user_id, :effective_at]
+    add_index :user_statuses, [ :user_id, :effective_at ]
     add_index :user_statuses, :user_id
   end
 end
