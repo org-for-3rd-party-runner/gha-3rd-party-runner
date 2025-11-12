@@ -40,10 +40,11 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Build Docker image with cache
+      - name: Build and push Docker image with cache
         uses: docker/build-push-action@v5
         with:
           context: .
-          push: false
-          load: true
-          tags: gha-3rd-party-runner-sample-web:latest
+          push: true
+          tags: ghcr.io/org-for-3rd-party-runner/gha-3rd-party-runner-web:latest
+          cache-from: type=registry,ref=ghcr.io/org-for-3rd-party-runner/gha-3rd-party-runner-web:buildcache
+          cache-to: type=registry,ref=ghcr.io/org-for-3rd-party-runner/gha-3rd-party-runner-web:buildcache,mode=max
