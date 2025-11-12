@@ -1,6 +1,6 @@
 class UserStatus < ApplicationRecord
   belongs_to :user
-  belongs_to :changed_by_user, class_name: 'User', optional: true
+  belongs_to :changed_by_user, class_name: "User", optional: true
 
   enum :status, { active: 0, suspended: 1, deleted: 2 }, prefix: true
 
@@ -10,7 +10,7 @@ class UserStatus < ApplicationRecord
 
   scope :current_status, -> {
     where(
-      id: select('MAX(id) as id')
+      id: select("MAX(id) as id")
         .group(:user_id)
     )
   }
@@ -29,7 +29,7 @@ class UserStatus < ApplicationRecord
       create!(
         user: user,
         status: :active,
-        reason: 'Initial status',
+        reason: "Initial status",
         changed_by_user: changed_by,
         effective_at: Time.current
       )

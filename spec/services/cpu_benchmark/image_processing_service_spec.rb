@@ -7,11 +7,11 @@ RSpec.describe CpuBenchmark::ImageProcessingService, type: :service do
     context 'with edge cases' do
       it 'raises ArgumentError for empty matrix' do
         expect { described_class.blur_matrix([]) }.to raise_error(ArgumentError, 'Matrix cannot be empty')
-        expect { described_class.blur_matrix([[]]) }.to raise_error(ArgumentError, 'Matrix cannot be empty')
+        expect { described_class.blur_matrix([ [] ]) }.to raise_error(ArgumentError, 'Matrix cannot be empty')
       end
 
       it 'raises ArgumentError for invalid radius' do
-        matrix = [[1, 2], [3, 4]]
+        matrix = [ [ 1, 2 ], [ 3, 4 ] ]
         expect { described_class.blur_matrix(matrix, radius: 0) }.to raise_error(ArgumentError, 'Radius must be positive')
         expect { described_class.blur_matrix(matrix, radius: -1) }.to raise_error(ArgumentError, 'Radius must be positive')
       end
@@ -20,9 +20,9 @@ RSpec.describe CpuBenchmark::ImageProcessingService, type: :service do
     context 'with small matrices (correctness tests)' do
       it 'blurs a simple 3x3 matrix with radius 1' do
         matrix = [
-          [1, 2, 3],
-          [4, 5, 6],
-          [7, 8, 9]
+          [ 1, 2, 3 ],
+          [ 4, 5, 6 ],
+          [ 7, 8, 9 ]
         ]
         result = described_class.blur_matrix(matrix, radius: 1)
 
@@ -35,9 +35,9 @@ RSpec.describe CpuBenchmark::ImageProcessingService, type: :service do
 
       it 'handles uniform matrix' do
         matrix = [
-          [5, 5, 5],
-          [5, 5, 5],
-          [5, 5, 5]
+          [ 5, 5, 5 ],
+          [ 5, 5, 5 ],
+          [ 5, 5, 5 ]
         ]
         result = described_class.blur_matrix(matrix, radius: 1)
 
@@ -72,16 +72,16 @@ RSpec.describe CpuBenchmark::ImageProcessingService, type: :service do
   describe '.apply_filter' do
     context 'with edge cases' do
       it 'raises ArgumentError for empty matrix or kernel' do
-        matrix = [[1, 2], [3, 4]]
-        kernel = [[1, 0], [0, 1]]
+        matrix = [ [ 1, 2 ], [ 3, 4 ] ]
+        kernel = [ [ 1, 0 ], [ 0, 1 ] ]
 
         expect { described_class.apply_filter([], kernel) }.to raise_error(ArgumentError, 'Matrix cannot be empty')
         expect { described_class.apply_filter(matrix, []) }.to raise_error(ArgumentError, 'Kernel cannot be empty')
       end
 
       it 'raises ArgumentError for even-sized kernel' do
-        matrix = [[1, 2], [3, 4]]
-        even_kernel = [[1, 0], [0, 1]]
+        matrix = [ [ 1, 2 ], [ 3, 4 ] ]
+        even_kernel = [ [ 1, 0 ], [ 0, 1 ] ]
 
         expect { described_class.apply_filter(matrix, even_kernel) }.to raise_error(ArgumentError, 'Kernel dimensions must be odd')
       end
@@ -90,10 +90,10 @@ RSpec.describe CpuBenchmark::ImageProcessingService, type: :service do
     context 'with small matrices (correctness tests)' do
       let(:matrix) do
         [
-          [1, 2, 3, 4],
-          [5, 6, 7, 8],
-          [9, 10, 11, 12],
-          [13, 14, 15, 16]
+          [ 1, 2, 3, 4 ],
+          [ 5, 6, 7, 8 ],
+          [ 9, 10, 11, 12 ],
+          [ 13, 14, 15, 16 ]
         ]
       end
 
@@ -139,17 +139,17 @@ RSpec.describe CpuBenchmark::ImageProcessingService, type: :service do
     context 'with small matrices (correctness tests)' do
       let(:matrix) do
         [
-          [1, 2, 3],
-          [4, 5, 6],
-          [7, 8, 9]
+          [ 1, 2, 3 ],
+          [ 4, 5, 6 ],
+          [ 7, 8, 9 ]
         ]
       end
 
       let(:simple_kernel) do
         [
-          [0, 0, 0],
-          [0, 1, 0],
-          [0, 0, 0]
+          [ 0, 0, 0 ],
+          [ 0, 1, 0 ],
+          [ 0, 0, 0 ]
         ]
       end
 
@@ -162,9 +162,9 @@ RSpec.describe CpuBenchmark::ImageProcessingService, type: :service do
 
       it 'performs convolution with averaging kernel' do
         avg_kernel = [
-          [1.0 / 9, 1.0 / 9, 1.0 / 9],
-          [1.0 / 9, 1.0 / 9, 1.0 / 9],
-          [1.0 / 9, 1.0 / 9, 1.0 / 9]
+          [ 1.0 / 9, 1.0 / 9, 1.0 / 9 ],
+          [ 1.0 / 9, 1.0 / 9, 1.0 / 9 ],
+          [ 1.0 / 9, 1.0 / 9, 1.0 / 9 ]
         ]
         result = described_class.matrix_convolution(matrix, avg_kernel)
 

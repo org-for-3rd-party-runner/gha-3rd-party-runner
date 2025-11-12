@@ -2,9 +2,9 @@ module Api
   module V1
     class TagsController < ApplicationController
       include Authenticatable
-      skip_before_action :authenticate_request, only: [:index, :show]
-      before_action :require_authentication!, only: [:create, :update, :destroy]
-      before_action :set_tag, only: [:show, :update, :destroy]
+      skip_before_action :authenticate_request, only: [ :index, :show ]
+      before_action :require_authentication!, only: [ :create, :update, :destroy ]
+      before_action :set_tag, only: [ :show, :update, :destroy ]
 
       def index
         tags = Tag.all
@@ -49,7 +49,7 @@ module Api
       def set_tag
         @tag = Tag.find(params[:id])
       rescue ActiveRecord::RecordNotFound
-        render json: { error: 'Tag not found' }, status: :not_found
+        render json: { error: "Tag not found" }, status: :not_found
       end
 
       def tag_params

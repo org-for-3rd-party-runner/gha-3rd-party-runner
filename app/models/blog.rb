@@ -22,7 +22,7 @@ class Blog < ApplicationRecord
     # reference: https://github.com/rails/rails/blob/7b96382519b8bdd0156ab63c849728e38039293b/activerecord/lib/active_record/scoping.rb#L25-L27
     return current_scope if title.blank?
 
-    sanitized_title = sanitize_sql_for_conditions(["title LIKE ?", "%#{title}%"])
+    sanitized_title = sanitize_sql_for_conditions([ "title LIKE ?", "%#{title}%" ])
     where(sanitized_title)
   end
 
@@ -30,9 +30,9 @@ class Blog < ApplicationRecord
   # @return [Blog::ActiveRecord_Relation]
   def self.filter_by_status(status)
     case status
-    when 'published'
+    when "published"
       published
-    when 'unpublished'
+    when "unpublished"
       unpublished
     else
       # メソッドチェーンを継続するためにcurrent_scopeを返す

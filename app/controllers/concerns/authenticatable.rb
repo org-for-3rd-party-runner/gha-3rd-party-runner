@@ -13,10 +13,10 @@ module Authenticatable
   end
 
   def authorize_request
-    header = request.headers['Authorization']
+    header = request.headers["Authorization"]
     return nil unless header.present?
 
-    token = header.split(' ').last
+    token = header.split(" ").last
     decoded = JsonWebToken.decode(token)
     return nil unless decoded
 
@@ -27,7 +27,7 @@ module Authenticatable
 
   def require_authentication!
     unless @current_user
-      render json: { error: 'Unauthorized' }, status: :unauthorized
+      render json: { error: "Unauthorized" }, status: :unauthorized
       return false
     end
     true

@@ -2,7 +2,7 @@ module Api
   module V1
     class AuthController < ApplicationController
       include Authenticatable
-      skip_before_action :authenticate_request, only: [:signup, :login]
+      skip_before_action :authenticate_request, only: [ :signup, :login ]
 
       def signup
         user = User.new
@@ -26,10 +26,10 @@ module Api
             token = JsonWebToken.encode(user_id: credential.user.id)
             render json: { token: token, user: credential.user.full_profile }, status: :ok
           else
-            render json: { error: 'Account is suspended or deleted' }, status: :forbidden
+            render json: { error: "Account is suspended or deleted" }, status: :forbidden
           end
         else
-          render json: { error: 'Invalid credentials' }, status: :unauthorized
+          render json: { error: "Invalid credentials" }, status: :unauthorized
         end
       end
 

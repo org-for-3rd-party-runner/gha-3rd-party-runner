@@ -101,7 +101,7 @@ RSpec.describe 'Api::V1::Blogs', type: :request do
       end
 
       it 'filters blogs by array of tag_ids' do
-        get '/api/v1/blogs', params: { tag_ids: [tag1.id, tag2.id] }
+        get '/api/v1/blogs', params: { tag_ids: [ tag1.id, tag2.id ] }
         expect(response).to have_http_status(:ok)
         json_response = JSON.parse(response.body)
         expect(json_response.size).to eq(2)
@@ -165,7 +165,7 @@ RSpec.describe 'Api::V1::Blogs', type: :request do
         expect(json_response['tags'].size).to eq(2)
 
         tag = json_response['tags'].first
-        expect(tag.keys).to match_array(['id', 'name', 'slug'])
+        expect(tag.keys).to match_array([ 'id', 'name', 'slug' ])
         expect(tag['id']).to be_present
         expect(tag['name']).to be_present
         expect(tag['slug']).to be_present
@@ -247,13 +247,13 @@ RSpec.describe 'Api::V1::Blogs', type: :request do
         it 'attaches tags using tag_ids parameter' do
           tag1 = create(:tag)
           tag2 = create(:tag)
-          params_with_tags = valid_params.merge(tag_ids: [tag1.id, tag2.id])
+          params_with_tags = valid_params.merge(tag_ids: [ tag1.id, tag2.id ])
 
           post '/api/v1/blogs', params: params_with_tags, headers: auth_headers, as: :json
 
           expect(response).to have_http_status(:created)
           created_blog = Blog.last
-          expect(created_blog.tags.pluck(:id)).to match_array([tag1.id, tag2.id])
+          expect(created_blog.tags.pluck(:id)).to match_array([ tag1.id, tag2.id ])
         end
       end
 
@@ -347,12 +347,12 @@ RSpec.describe 'Api::V1::Blogs', type: :request do
           create(:blog_tag, blog: blog, tag: tag1)
 
           patch "/api/v1/blogs/#{blog.id}",
-                params: { blog: { title: blog.title }, tag_ids: [tag2.id, tag3.id] },
+                params: { blog: { title: blog.title }, tag_ids: [ tag2.id, tag3.id ] },
                 headers: auth_headers,
                 as: :json
 
           expect(response).to have_http_status(:ok)
-          expect(blog.reload.tags.pluck(:id)).to match_array([tag2.id, tag3.id])
+          expect(blog.reload.tags.pluck(:id)).to match_array([ tag2.id, tag3.id ])
         end
 
         it 'returns updated blog with 200 status' do

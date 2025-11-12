@@ -68,7 +68,7 @@ RSpec.describe BlogTag, type: :model do
         results = BlogTag.by_blog(blog1.id)
 
         expect(results.count).to eq(2)
-        expect(results.pluck(:blog_id).uniq).to eq([blog1.id])
+        expect(results.pluck(:blog_id).uniq).to eq([ blog1.id ])
       end
 
       it 'returns empty result when no blog_tags exist for the blog' do
@@ -100,7 +100,7 @@ RSpec.describe BlogTag, type: :model do
         results = BlogTag.by_tag(tag1.id)
 
         expect(results.count).to eq(2)
-        expect(results.pluck(:tag_id).uniq).to eq([tag1.id])
+        expect(results.pluck(:tag_id).uniq).to eq([ tag1.id ])
       end
 
       it 'returns empty result when no blog_tags exist for the tag' do

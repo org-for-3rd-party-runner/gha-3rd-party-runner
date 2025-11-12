@@ -2,10 +2,10 @@ module Api
   module V1
     class UsersController < ApplicationController
       include Authenticatable
-      skip_before_action :authenticate_request, only: [:index, :show]
-      before_action :set_user, only: [:show, :update, :destroy]
-      before_action :require_authentication!, only: [:update, :destroy]
-      before_action :check_authorization!, only: [:update, :destroy]
+      skip_before_action :authenticate_request, only: [ :index, :show ]
+      before_action :set_user, only: [ :show, :update, :destroy ]
+      before_action :require_authentication!, only: [ :update, :destroy ]
+      before_action :check_authorization!, only: [ :update, :destroy ]
 
       def index
         users = User.all
@@ -38,12 +38,12 @@ module Api
       def set_user
         @user = User.find(params[:id])
       rescue ActiveRecord::RecordNotFound
-        render json: { error: 'User not found' }, status: :not_found
+        render json: { error: "User not found" }, status: :not_found
       end
 
       def check_authorization!
         unless current_user_authorized?(@user)
-          render json: { error: 'Forbidden' }, status: :forbidden
+          render json: { error: "Forbidden" }, status: :forbidden
         end
       end
 

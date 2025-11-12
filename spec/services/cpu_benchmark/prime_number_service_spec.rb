@@ -39,7 +39,7 @@ RSpec.describe CpuBenchmark::PrimeNumberService, type: :service do
     context 'with large numbers (performance tests)' do
       it 'correctly identifies large prime numbers' do
         expect(described_class.prime?(104_729)).to be true # 10000th prime
-        expect(described_class.prime?(1_299_709)).to be true #100000th prime
+        expect(described_class.prime?(1_299_709)).to be true # 100000th prime
       end
 
       it 'correctly identifies large composite numbers' do
@@ -57,7 +57,7 @@ RSpec.describe CpuBenchmark::PrimeNumberService, type: :service do
       end
 
       it 'returns correct primes up to 10' do
-        expect(described_class.primes_up_to(10)).to eq([2, 3, 5, 7])
+        expect(described_class.primes_up_to(10)).to eq([ 2, 3, 5, 7 ])
       end
 
       it 'returns correct primes up to 30' do
@@ -68,13 +68,13 @@ RSpec.describe CpuBenchmark::PrimeNumberService, type: :service do
     context 'with large numbers (performance tests)' do
       it 'generates primes up to 100000' do
         primes = described_class.primes_up_to(100_000)
-        expect(primes.size).to eq(9592) #There are 9592 primes below 100000
+        expect(primes.size).to eq(9592) # There are 9592 primes below 100000
         expect(primes.last).to eq(99_991)
       end
 
       it 'generates primes up to 500000' do
         primes = described_class.primes_up_to(500_000)
-        expect(primes.size).to eq(41_538) #There are 41538 primes below 500000
+        expect(primes.size).to eq(41_538) # There are 41538 primes below 500000
         expect(primes.last).to eq(499_979)
       end
     end
