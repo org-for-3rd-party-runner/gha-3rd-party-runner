@@ -8,6 +8,7 @@ on:
     branches:
       - main
 
+# 検証5
 jobs:
   test:
     runs-on: blacksmith-2vcpu-ubuntu-2404
