@@ -8,7 +8,7 @@ on:
     branches:
       - main
 
-# Test 1回目!
+# Test 2回目!
 jobs:
   test:
     runs-on: ubuntu-latest
